@@ -1,0 +1,38 @@
+
+## Instalação e Execução
+
+1. Clone ou baixe os arquivos
+2. Abra o arquivo `index.html` em qualquer navegador moderno
+3. Não é necessário instalar dependências ou configurar servidor
+
+## Algoritmo de Nesting
+
+O sistema utiliza o algoritmo **First-Fit Decreasing Height** (FFDH):
+
+1. Ordena as peças por área (maior primeiro)
+2. Para cada peça, tenta encaixar em espaços livres existentes
+3. Considera rotação das peças (opcional)
+4. Divide espaços livres após cada alocação
+5. Continua até alocar todas as peças ou criar novas chapas
+
+## Compatibilidade
+
+- Chrome 60+
+- Firefox 55+
+- Safari 11+
+- Edge 79+
+- Qualquer navegador moderno
+
+## Limitações
+
+- Máximo de 6 chapas exibidas visualmente (para performance)
+- Gráfico limitado a 10 chapas para legibilidade
+- Algoritmo básico (para produção, considerar algoritmos mais avançados)
+
+## Autor
+
+Desenvolvido para otimização real de materiais industriais.
+
+## Licença
+
+Uso livre para fins educacionais e comerciais.

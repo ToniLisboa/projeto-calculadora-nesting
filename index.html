@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📐 Calculadora de Nesting (Otimização Real) v4.1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cube"></i>
+                    <div>
+                        <h1>Calculadora de Nesting</h1>
+                        <span>Otimização Real v4.1</span>
+                    </div>
+                </div>
+                <div>
+                    <button id="exportBtn" type="button" class="btn btn-success">
+                        <i class="fas fa-file-export"></i> Exportar Resultados
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="alert alert-success" id="successAlert">
+            <i class="fas fa-check-circle"></i> Cálculo realizado com sucesso!
+        </div>
+        
+        <div class="alert alert-error" id="errorAlert">
+            <i class="fas fa-exclamation-circle"></i> <span id="errorMessage"></span>
+        </div>
+
+        <div class="app-container">
+            <!-- Configuração da Chapa -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-th-large"></i> Configuração da Chapa Base</h2>
+                
+                <div class="form-group">
+                    <label for="tamanhoPadrao">Tamanho Padrão:</label>
+                    <select id="tamanhoPadrao">
+                        <option value="personalizado">Personalizado</option>
+                        <option value="200x100" selected>Padrão (2.00 x 1.00 m)</option>
+                        <option value="300x200">Acrílico Grande (3.00 x 2.00 m)</option>
+                        <option value="122x244">Chapa Full (1.22 x 2.44 m)</option>
+                        <option value="100x100">Meia Chapa (1.00 x 1.00 m)</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="larguraChapa">Largura (cm):</label>
+                        <input type="number" id="larguraChapa" min="1" step="0.1" value="200">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="alturaChapa">Altura (cm):</label>
+                        <input type="number" id="alturaChapa" min="1" step="0.1" value="100">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="material">Material:</label>
+                    <select id="material">
+                        <option value="1.19" selected>Acrilico</option>
+                        <option value="1.27">Petg Cristal</option>
+                        <option value="1.07">PS</option>
+                        <option value="0.95">PP</option>
+                        <option value="1.33">PVC</option>
+                        <option value="0.75">MDF (Aprox)</option>
+                        <option value="1.35">ACM (Aprox)</option>
+                        <option value="1.00">Outro</option>
+                    </select>
+                    <div class="material-info">
+                        <span>Densidade: <strong id="densidadeValor">1.19</strong> g/cm³</span>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="espessura">Espessura (mm):</label>
+                        <input type="number" id="espessura" min="0.1" step="0.1" value="3">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="corte">Fresa/Serra (cm):</label>
+                        <input type="number" id="corte" min="0" step="0.1" value="0.5">
+                    </div>
+                </div>
+                
+                <div class="toggle-container">
+                    <label class="toggle-label">
+                        Mostrar Rotacionadas:
+                        <span class="toggle-switch">
+                            <input type="checkbox" id="toggleRotacionar" checked>
+                            <span class="toggle-slider"></span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Lista de Peças -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-shapes"></i> Lista de Peças para Corte</h2>
+                
+                <div class="table-container">
+                    <table id="pecasTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Largura (cm)</th>
+                                <th>Altura (cm)</th>
+                                <th>Quantidade</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pecasBody">
+                            <!-- Linhas serão adicionadas dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="form-row form-row-margin">
+                    <div class="form-group">
+                        <label for="novaLargura">Largura (cm):</label>
+                        <input type="number" id="novaLargura" min="0.1" step="0.1" value="30">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="novaAltura">Altura (cm):</label>
+                        <input type="number" id="novaAltura" min="0.1" step="0.1" value="20">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="novaQuantidade">Quantidade:</label>
+                        <input type="number" id="novaQuantidade" min="1" value="1">
+                    </div>
+                </div>
+                
+                <button id="adicionarPeca" type="button" class="btn btn-primary btn-block">
+                    <i class="fas fa-plus"></i> Adicionar Peça
+                </button>
+                
+                <button id="calcular" type="button" class="btn btn-success btn-block btn-calcular">
+                    <i class="fas fa-calculator"></i> Calcular Otimização
+                </button>
+            </div>
+        </div>
+        
+        <!-- Resultados -->
+        <div class="results-container">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Processando otimização de corte...</p>
+            </div>
+            
+            <div id="resultados" class="resultados-hidden">
+                <div class="results-header">
+                    <h2 class="card-title"><i class="fas fa-chart-bar"></i> Resultados da Otimização</h2>
+                </div>
+                
+                <div class="stats-box">
+                    <div class="stat">
+                        <h3>Chapas Necessárias</h3>
+                        <p id="chapasNecessarias">0</p>
+                    </div>
+                    
+                    <div class="stat">
+                        <h3>Aproveitamento Médio</h3>
+                        <p id="aproveitamentoMedio">0%</p>
+                    </div>
+                    
+                    <div class="stat">
+                        <h3>Peso Total Estimado</h3>
+                        <p id="pesoTotal">0 kg</p>
+                    </div>
+                    
+                    <div class="stat">
+                        <h3>Peças Cortadas</h3>
+                        <p id="pecasCortadas">0</p>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title"><i class="fas fa-chart-pie"></i> Distribuição de Peças por Chapa</h3>
+                    <canvas id="chartCanvas"></canvas>
+                </div>
+                
+                <h2 class="card-title card-title-margin"><i class="fas fa-layer-group"></i> Layout das Chapas</h2>
+                <div id="sheetContainer" class="sheet-container">
+                    <!-- Chapas serão renderizadas aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>Calculadora de Nesting v4.1 - Sistema de Otimização de Corte &copy; 2023</p>
+            <p class="footer-subtitle">Desenvolvido para otimização real de materiais como acrílico, MDF, PVC e outros</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
