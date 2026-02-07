@@ -75,3 +75,37 @@ function atualizarDensidade() {
     const densidade = materialSelect.value;
     document.getElementById('densidadeValor').textContent = densidade;
 }
+
+function carregarPecasExemplo() {
+    // Adiciona algumas peças de exemplo
+    pecas = [
+        { id: 1, largura: 30, altura: 20, quantidade: 4, cor: CORES_PECAS[0] },
+        { id: 2, largura: 25, altura: 15, quantidade: 6, cor: CORES_PECAS[1] },
+        { id: 3, largura: 40, altura: 30, quantidade: 2, cor: CORES_PECAS[2] },
+        { id: 4, largura: 15, altura: 10, quantidade: 8, cor: CORES_PECAS[3] }
+    ];
+}
+
+function renderizarTabelaPecas() {
+    const tbody = document.getElementById('pecasBody');
+    tbody.innerHTML = '';
+
+    pecas.forEach((peca, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>
+                <div class="item-color" style="background-color: ${peca.cor};"></div>
+                ${index + 1}
+            </td>
+            <td>${peca.largura.toFixed(1)}</td>
+            <td>${peca.altura.toFixed(1)}</td>
+            <td>${peca.quantidade}</td>
+            <td>
+                <button onclick="removerPeca(${index})" class="btn" style="padding: 5px 10px; background-color: #e74c3c; color: white; font-size: 0.9rem;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
