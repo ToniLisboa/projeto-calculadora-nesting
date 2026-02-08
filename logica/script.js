@@ -93,14 +93,14 @@ function renderizarTabelaPecas() {
     pecas.forEach((peca, index) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>
+            <td data-label="Peça">
                 <div class="item-color" style="background-color: ${peca.cor};"></div>
                 ${index + 1}
             </td>
-            <td>${peca.largura.toFixed(1)}</td>
-            <td>${peca.altura.toFixed(1)}</td>
-            <td>${peca.quantidade}</td>
-            <td>
+            <td data-label="Largura (cm)">${peca.largura.toFixed(1)}</td>
+            <td data-label="Altura (cm)">${peca.altura.toFixed(1)}</td>
+            <td data-label="Quantidade">${peca.quantidade}</td>
+            <td data-label="Ações">
                 <button onclick="removerPeca(${index})" class="btn" style="padding: 5px 10px; background-color: #e74c3c; color: white; font-size: 0.9rem;">
                     <i class="fas fa-trash"></i>
                 </button>

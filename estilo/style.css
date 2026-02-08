@@ -28,6 +28,18 @@ body {
     padding: 20px;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 header {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
@@ -470,23 +482,159 @@ input:checked + .toggle-slider:before {
     100% { transform: rotate(360deg); }
 }
 
+@media (max-width: 1200px) {
+    .container {
+        padding: 18px;
+    }
+
+    .header-content {
+        gap: 16px;
+    }
+
+    .stats-box {
+        gap: 15px;
+    }
+}
+
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
         text-align: center;
         gap: 20px;
     }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .logo span {
+        font-size: 0.95rem;
+    }
     
     .form-row {
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .stat {
         min-width: 100%;
     }
 
     .chart-area {
         height: 260px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    table {
+        min-width: 560px;
+    }
+}
+
+@media (max-width: 640px) {
+    .table-container {
+        overflow-x: visible;
+    }
+
+    table {
+        min-width: 0;
+    }
+
+    thead {
+        display: none;
+    }
+
+    table, tbody, tr, td {
+        display: block;
+        width: 100%;
+    }
+
+    tr {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0;
+        border: 0;
+        text-align: right;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--dark);
+        text-align: left;
+    }
+
+    td:last-child {
+        justify-content: flex-end;
+    }
+
+    td:last-child::before {
+        content: "";
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 0.95rem;
+    }
+
+    header {
+        padding: 18px 0;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .container {
+        padding: 14px;
+    }
+
+    .logo i {
+        font-size: 2rem;
+        padding: 12px;
+    }
+
+    .logo h1 {
+        font-size: 1.3rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .stats-box {
+        gap: 12px;
+    }
+
+    .stat {
+        padding: 16px;
+    }
+
+    .sheet {
+        padding: 16px;
+    }
+
+    .chart-container {
+        padding: 20px;
     }
 }

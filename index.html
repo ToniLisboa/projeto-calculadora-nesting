@@ -28,19 +28,19 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="alert alert-success" id="successAlert">
+    <div class="container" role="main" id="conteudo">
+        <div class="alert alert-success" id="successAlert" role="status" aria-live="polite">
             <i class="fas fa-check-circle"></i> Cálculo realizado com sucesso!
         </div>
         
-        <div class="alert alert-error" id="errorAlert">
+        <div class="alert alert-error" id="errorAlert" role="alert" aria-live="assertive">
             <i class="fas fa-exclamation-circle"></i> <span id="errorMessage"></span>
         </div>
 
         <div class="app-container">
             <!-- Configuração da Chapa -->
-            <div class="card">
-                <h2 class="card-title"><i class="fas fa-th-large"></i> Configuração da Chapa Base</h2>
+            <div class="card" aria-labelledby="configChapaTitle">
+                <h2 class="card-title" id="configChapaTitle"><i class="fas fa-th-large"></i> Configuração da Chapa Base</h2>
                 
                 <div class="form-group">
                     <label for="tamanhoPadrao">Tamanho Padrão:</label>
@@ -104,18 +104,19 @@
             </div>
             
             <!-- Lista de Peças -->
-            <div class="card">
-                <h2 class="card-title"><i class="fas fa-shapes"></i> Lista de Peças para Corte</h2>
+            <div class="card" aria-labelledby="listaPecasTitle">
+                <h2 class="card-title" id="listaPecasTitle"><i class="fas fa-shapes"></i> Lista de Peças para Corte</h2>
                 
                 <div class="table-container">
                     <table id="pecasTable">
+                        <caption class="sr-only">Lista de peças para corte</caption>
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Largura (cm)</th>
-                                <th>Altura (cm)</th>
-                                <th>Quantidade</th>
-                                <th>Ações</th>
+                                <th scope="col">#</th>
+                                <th scope="col">Largura (cm)</th>
+                                <th scope="col">Altura (cm)</th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody id="pecasBody">
@@ -160,7 +161,7 @@
             
             <div id="resultados" class="hidden">
                 <div class="results-header">
-                    <h2 class="card-title"><i class="fas fa-chart-bar"></i> Resultados da Otimização</h2>
+                    <h2 class="card-title" id="resultadosTitle"><i class="fas fa-chart-bar"></i> Resultados da Otimização</h2>
                 </div>
                 
                 <div class="stats-box">
